@@ -34,9 +34,15 @@
 }
 
 #neto_virtual_close_btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
   cursor: pointer;
+  border-radius: 10px;
   font-weight: bold;
+}
+
+#neto_virtual_close_btn:hover {
+  background-color: #3333;
+}
+
+#neto_virtual_close_btn:active {
+  background-color: #3336;
 }

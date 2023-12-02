@@ -11,6 +11,7 @@ const svgTrusted = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 </defs>
 </svg>
 `
+
 const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_5_463)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M39.3819 31.3707C39.3819 33.5172 37.6744 35.2233 35.5263 35.2233C33.3782 35.2233 31.6708 33.5172 31.6708 31.3707C31.6708 29.2243 33.3782 27.5182 35.5263 27.5182C37.6194 27.5182 39.3819 29.2243 39.3819 31.3707ZM11.2913 35.2233C13.4394 35.2233 15.1469 33.5172 15.1469 31.3707C15.1469 29.2243 13.4394 27.5182 11.2913 27.5182C9.14322 27.5182 7.43575 29.2243 7.43575 31.3707C7.43575 33.5172 9.14322 35.2233 11.2913 35.2233ZM3.63526 38.9107C0.936365 32.2513 1.81764 25.2617 5.12241 19.8131L21.3158 9.46627C22.0318 9.41124 22.8029 9.3562 23.5741 9.3562H24.4003C35.8017 9.3562 45.0551 18.6023 45.0551 29.9948C45.0551 33.0218 44.4492 35.9938 43.2925 38.8006C42.1359 41.6075 40.4284 44.1392 38.2803 46.2856C36.1322 48.432 33.5985 50.1381 30.7895 51.2939C27.9804 52.4497 25.0061 53.0551 21.9768 53.0551H1.32192C1.04652 53.0551 0.771127 52.945 0.550808 52.8349C0.33049 52.7248 0.165252 52.4497 0.0550925 52.1745C-0.0550666 51.8993 -0.0550666 51.6241 0.0550925 51.3489C0.110172 51.0738 0.275411 50.8536 0.495729 50.6885L5.72829 46.5057C5.94861 46.3406 6.11384 46.0654 6.16892 45.7903C6.224 45.5151 6.224 45.2399 6.11384 44.9647L3.63526 38.9107Z" fill="#E23535"/>
@@ -24,16 +25,30 @@ const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 </defs>
 </svg>
 `
+
+const closeButton = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.6">
+<path d="M9.33331 9.33337L22.6666 22.6667M9.33331 22.6667L22.6666 9.33337" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+`
+
 const htmlTemplate = `
 <div id="neto_virtual_content">
-  <button id="neto_virtual_close_btn">&times;</button>
-  <div style="display: flex; gap: 8px; align-items: center;">
-    <div id="neto_virtual_icon"></div>
-    <h3 style="font-size: 35px; font-weight: 800; margin: 1rem 0; font-family: 'Roboto', sans-serif; ">NetoVirtual:</h3>
+  <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <div id="neto_virtual_icon" style="margin-top: -8px;">
+      </div>
+      <h3 id="neto_virtual_title" style="font-size: 35px; font-weight: 800; margin: 1rem 0; font-family: 'Roboto', sans-serif; ">
+      </h3>
+    </div>
+    <div id="neto_virtual_close_btn" style="margin-bottom: auto;">${closeButton}</div>
   </div>
-  <p id="neto_virtual_message" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 400; color: black;"></p>
+  <p id="neto_virtual_message" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 400; color: black;">
+  </p>
 </div>
 `
+
 const whiteList = [
   'https://www.google.com/',
   'https://www.facebook.com/',
@@ -49,21 +64,24 @@ overlayDiv.innerHTML = htmlTemplate;
 
 document.body.appendChild(overlayDiv); 
 
-function loadUntrustedOverlay() {
-  document.getElementById('neto_virtual_message').textContent =
-  'Site não seguro! Não insira informações pessoais nem financeiras.';
-  document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
-  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
-}  
-
 function loadTrustedOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Empresa Confiável!';
   document.getElementById('neto_virtual_message').textContent =
-  'Site na lista de sites seguros ✅';
+  'Esta é uma empresa verificada para você prosseguir com suas compras.';
   document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
   document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
 }
 
+function loadUntrustedOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Atenção!';
+  document.getElementById('neto_virtual_message').textContent =
+  'Encontramos vulnerabilidades neste site e não o recomendamos.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
+}  
+
 function loadNeutralOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Hmm...';
   document.getElementById('neto_virtual_message').textContent =
   'Ainda não sei se esse site é seguro ou não.';
   document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
@@ -71,10 +89,10 @@ function loadNeutralOverlay() {
 }
 
 function loadOverlayContent(url) {
-  if (!url.startsWith('https')) {
-    loadUntrustedOverlay();
-  } else if (whiteList.includes(url)) {
+  if (whiteList.includes(url)) {
     loadTrustedOverlay();
+  } else if (!url.startsWith('https')) {
+    loadUntrustedOverlay();
   } else {
     loadNeutralOverlay();
   }
