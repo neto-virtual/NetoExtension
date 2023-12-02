@@ -26,10 +26,10 @@ const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 `
 
 const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; align-items: center; justify-content: center; flex-direction:"row";">
-<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Magalu</text></div>
-<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Carrefour</text></div>
-<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Shopee</text></div>
-<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Riachuelo.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Riachuelo</text></div>
+<div id="neto_virtual_partner"><a href="https://www.magazineluiza.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Magalu"></a><text id="neto_virtual_partnerText">Magalu</text></div>
+<div id="neto_virtual_partner"><a href="https://www.carrefour.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Carrefour"></a><text id="neto_virtual_partnerText">Carrefour</text></div>
+<div id="neto_virtual_partner"><a href="https://shopee.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Shopee"></a><text id="neto_virtual_partnerText">Shopee</text></div>
+<div id="neto_virtual_partner"><a href="https://www.amazon.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Amazon.png?raw=true" alt="Amazon"></a><text id="neto_virtual_partnerText">Amazon</text></div>
 </div>`
 
 
