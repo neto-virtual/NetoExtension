@@ -1,4 +1,3 @@
-/* overlay.css */
 #neto_virtual_wrapper {
   display: block;
   position: fixed;
@@ -10,6 +9,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 540px;
   user-select: none;
+}
+
+#neto_virtual_wrapper_popup {
+  display: block;
+  z-index: 9000;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 540px;
+  user-select: none;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
 }
 
 .neto_virtual_trusted {

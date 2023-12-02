@@ -34,7 +34,7 @@ const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; a
 
 
 const closeButton = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.6">
+<g opacity="1">
 <path d="M9.33331 9.33337L22.6666 22.6667M9.33331 22.6667L22.6666 9.33337" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>
@@ -55,11 +55,18 @@ const htmlTemplate = `
 </div>
 `
 const whiteList = [
-  'https://www.google.com/',
-  'https://www.facebook.com/',
-  'https://www.twitter.com/',
-  'https://www.instagram.com/',
-  'https://www.linkedin.com/',
+  'https://www.amazon.com',
+  'https://www.google.com',
+  'https://www.facebook.com',
+  'https://www.twitter.com',
+  'https://www.instagram.com',
+  'https://www.linkedin.com',
+  'https://amazon.com',
+  'https://google.com',
+  'https://facebook.com',
+  'https://twitter.com',
+  'https://instagram.com',
+  'https://linkedin.com',
 ];
 
 const overlayDiv = document.createElement('div');
@@ -101,7 +108,7 @@ function loadNeutralOverlay() {
 }
 
 function loadOverlayContent(url) {
-  if (whiteList.includes(url)) {
+  if (whiteList.some(whitelisted => url.includes(whitelisted))) {
     loadTrustedOverlay();
   } else if (!url.startsWith('https')) {
     loadUntrustedOverlay();
