@@ -1,0 +1,24 @@
+/* overlay.css */
+#neto_virtual_wrapper {
+  display: block;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#neto_virtual_content {
+  position: relative;
+}
+
+#neto_virtual_close_btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}

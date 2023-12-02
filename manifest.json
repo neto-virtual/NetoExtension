@@ -1,22 +1,16 @@
 {
   "manifest_version": 2,
-  "name": "URL Popup",
+  "name": "URL Overlay",
   "version": "1.0",
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "activeTab"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "css": ["overlay.css"]
     }
   ],
   "browser_action": {
     "default_popup": "popup.html"
-  },
-  "icons": {
-
-  },
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
   }
 }
