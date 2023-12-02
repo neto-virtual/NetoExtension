@@ -26,10 +26,10 @@ const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 `
 
 const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; align-items: center; justify-content: center; flex-direction:"row";">
-<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Ícone PNG">
-<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Ícone PNG">
-<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Ícone PNG">
-<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Riachuelo.png?raw=true" alt="Ícone PNG">
+<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Magalu</text></div>
+<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Carrefour</text></div>
+<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Shopee</text></div>
+<div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Riachuelo.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Riachuelo</text></div>
 </div>`
 
 const htmlTemplate = `

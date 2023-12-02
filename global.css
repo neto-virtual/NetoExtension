@@ -46,3 +46,17 @@
 #neto_virtual_close_btn:active {
   background-color: #3336;
 }
+
+#neto_virtual_partner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#neto_virtual_partnerText {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 5px;
+}
