@@ -24,6 +24,14 @@ const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 </defs>
 </svg>
 `
+
+const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; align-items: center; justify-content: center; flex-direction:"row";">
+<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Ícone PNG">
+<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Ícone PNG">
+<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Ícone PNG">
+<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Riachuelo.png?raw=true" alt="Ícone PNG">
+</div>`
+
 const htmlTemplate = `
 <div id="neto_virtual_content">
   <button id="neto_virtual_close_btn">&times;</button>
@@ -32,7 +40,8 @@ const htmlTemplate = `
     <h3 style="font-size: 35px; font-weight: 800; margin: 1rem 0; font-family: 'Roboto', sans-serif; ">NetoVirtual:</h3>
   </div>
   <p id="neto_virtual_message" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 400; color: black;"></p>
-</div>
+  ${parteners}
+  </div>
 `
 const whiteList = [
   'https://www.google.com/',
@@ -53,11 +62,10 @@ document.body.appendChild(overlayDiv);
 
 function loadOverlayContent(url) {
   if (!url.startsWith('https')) {
-    document.getElementById('neto_virtual_message').textContent =
-    'Site não seguro! Não insira informações pessoais nem financeiras.';
-    // document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
-    document.getElementById('neto_virtual_icon').innerHTML =
-    `<img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/Magalu.png?raw=true" alt="Ícone PNG" style="height:20px width:"">`;
+    document.getElementById('neto_virtual_message').innerHTML =
+    `Encontramos vulnerabilidades neste<br>
+    site e não a recomendamos.`;
+    document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
     document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
   } else if (whiteList.includes(url)) {
     // Add 'ok' emoji if the website is in the white list
