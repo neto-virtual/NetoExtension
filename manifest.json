@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Verificador de Segurança",
+  "version": "1.0",
+  "description": "Verifica se um site é seguro.",
+  "browser_action": {
+    "default_popup": "popup.html"
+
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}
