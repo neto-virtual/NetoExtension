@@ -49,26 +49,35 @@ overlayDiv.innerHTML = htmlTemplate;
 
 document.body.appendChild(overlayDiv); 
 
+function loadUntrustedOverlay() {
+  document.getElementById('neto_virtual_message').textContent =
+  'Site não seguro! Não insira informações pessoais nem financeiras.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
+}  
+
+function loadTrustedOverlay() {
+  document.getElementById('neto_virtual_message').textContent =
+  'Site na lista de sites seguros ✅';
+  document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
+}
+
+function loadNeutralOverlay() {
+  document.getElementById('neto_virtual_message').textContent =
+  'Ainda não sei se esse site é seguro ou não.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_neutral';
+}
 
 function loadOverlayContent(url) {
   if (!url.startsWith('https')) {
-    document.getElementById('neto_virtual_message').textContent =
-    'Site não seguro! Não insira informações pessoais nem financeiras.';
-    document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
+    loadUntrustedOverlay();
   } else if (whiteList.includes(url)) {
-    // Add 'ok' emoji if the website is in the white list
-    document.getElementById('neto_virtual_message').textContent =
-      'Site na lista de sites seguros ✅';
-    document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
+    loadTrustedOverlay();
   } else {
-    document.getElementById('neto_virtual_message').textContent =
-      'Ainda não sei se esse site é seguro ou não.';
-    document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_neutral';
+    loadNeutralOverlay();
   }
-  
   document.getElementById('currentUrl').textContent = url;
 }
 
@@ -80,6 +89,5 @@ function closeOverlay(e) {
 const tabUrl = window.location.href;
 const closeBtn = document.getElementById('neto_virtual_close_btn');
 closeBtn.addEventListener('click', closeOverlay);
-
 
 loadOverlayContent(tabUrl);
