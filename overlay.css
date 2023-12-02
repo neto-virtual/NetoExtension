@@ -4,11 +4,29 @@
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 9999;
-  background-color: white;
-  border: 1px solid #ccc;
+  z-index: 9000;
   padding: 10px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.neto_virtual_trusted {
+  background-color: #DCFFE2;
+  color: #26A43A;
+}
+
+.neto_virtual_warning {
+  background-color: #FFD7D7;
+  color: #E23535;
+}
+
+.neto_virtual_neutral {
+  background-color: #F2F2F2;
+  color: #333;
+}
+
+.neto_virtual_hidden {
+  display: none;
 }
 
 #neto_virtual_content {
