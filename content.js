@@ -25,7 +25,7 @@ const svgWarning = `<svg width="45" height="53" viewBox="0 0 45 53" fill="none" 
 </svg>
 `
 
-const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; align-items: center; justify-content: center; flex-direction:"row";">
+const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; align-items: center; justify-content: left; flex-direction:"row";">
 <div id="neto_virtual_partner"><a href="https://www.magazineluiza.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Magalu.png?raw=true" alt="Magalu"></a><text id="neto_virtual_partnerText">Magalu</text></div>
 <div id="neto_virtual_partner"><a href="https://www.carrefour.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Carrefour.png?raw=true" alt="Carrefour"></a><text id="neto_virtual_partnerText">Carrefour</text></div>
 <div id="neto_virtual_partner"><a href="https://shopee.com.br/" target="_blank"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Shopee.png?raw=true" alt="Shopee"></a><text id="neto_virtual_partnerText">Shopee</text></div>
@@ -50,24 +50,44 @@ const htmlTemplate = `
     </div>
   </div>
   <p id="neto_virtual_message" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 400; color: black;"></p>
+  <p id="neto_virtual_partners_header" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 800; color: black;"></p>
   ${parteners}
   <div id="neto_virtual_close_btn">${closeButton}</div>
 </div>
 `
 const whiteList = [
-  'https://www.amazon.com',
-  'https://www.google.com',
-  'https://www.facebook.com',
-  'https://www.twitter.com',
-  'https://www.instagram.com',
-  'https://www.linkedin.com',
-  'https://amazon.com',
-  'https://google.com',
-  'https://facebook.com',
-  'https://twitter.com',
-  'https://instagram.com',
-  'https://linkedin.com',
+  'amazon.com',
+  'google.com',
+  'facebook.com',
+  'twitter.com',
+  'instagram.com',
+  'linkedin.com',
 ];
+
+const blackList = [
+  'mercadolivre.com.br',
+  'mercadolivre.com',
+  'decoratomoveis.com.br',
+  'buscape.com.br',
+]
+  
+const messages = {
+  trusted: {
+    title: 'Empresa Confiável',
+    message: 'Esta é uma empresa verificada para você prosseguir com suas compras.',
+    otherPartners: 'Outras empresas confiáveis',
+  },
+  untrusted: {
+    title: 'Empresa Suspeita',
+    message: 'Encontramos vulnerabilidades neste site e não o recomendamos.',
+    otherPartners: 'Empresas confiáveis para você:',
+  },
+  neutral: {
+    title: 'Hmm...',
+    message: 'Ainda não sei se esse site é seguro ou não.',
+    otherPartners: 'Empresas confiáveis para você:',
+  }
+}
 
 const overlayDiv = document.createElement('div');
 
@@ -77,31 +97,31 @@ overlayDiv.innerHTML = htmlTemplate;
 document.body.appendChild(overlayDiv); 
 
 function loadTrustedOverlay() {
-  document.getElementById('neto_virtual_title').textContent = 'Empresa Confiável!';
-  document.getElementById('neto_virtual_message').textContent =
-  'Esta é uma empresa verificada para você prosseguir com suas compras.';
+  document.getElementById('neto_virtual_title').textContent = messages.trusted.title;
+  document.getElementById('neto_virtual_message').textContent = messages.trusted.message;
+  document.getElementById('neto_virtual_partners_header').textContent = messages.trusted.otherPartners;
   document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
   document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
+
   document.getElementById('neto_virtual_close_btn').innerHTML = closeButton.replace('#1A1A1A', '#26A43A')
   document.getElementById('neto_virtual_close_btn').style.border = '2px solid #26A43A'
 
 }
 
 function loadUntrustedOverlay() {
-  document.getElementById('neto_virtual_title').textContent = 'Atenção!';
-  document.getElementById('neto_virtual_message').textContent =
-  'Encontramos vulnerabilidades neste site e não o recomendamos.';
+  document.getElementById('neto_virtual_title').textContent = messages.untrusted.title;
+  document.getElementById('neto_virtual_message').textContent = messages.untrusted.message;
+  document.getElementById('neto_virtual_partners_header').textContent = messages.untrusted.otherPartners;
   document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
   document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
+
   document.getElementById('neto_virtual_close_btn').innerHTML = closeButton.replace('#1A1A1A', '#E23535')
   document.getElementById('neto_virtual_close_btn').style.border = '2px solid #E23535'
-
 }  
 
 function loadNeutralOverlay() {
-  document.getElementById('neto_virtual_title').textContent = 'Hmm...';
-  document.getElementById('neto_virtual_message').textContent =
-  'Ainda não sei se esse site é seguro ou não.';
+  document.getElementById('neto_virtual_title').textContent = messages.neutral.title;
+  document.getElementById('neto_virtual_message').textContent = messages.neutral.message;
   document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
   document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_neutral';
   document.getElementById('neto_virtual_close_btn').style.border = '2px solid #1A1A1A'
@@ -110,11 +130,12 @@ function loadNeutralOverlay() {
 function loadOverlayContent(url) {
   if (whiteList.some(whitelisted => url.includes(whitelisted))) {
     loadTrustedOverlay();
-  } else if (!url.startsWith('https')) {
+  } else if (!url.startsWith('https') || blackList.some(blacklisted => url.includes(blacklisted))) {
     loadUntrustedOverlay();
   } else {
     loadNeutralOverlay();
   }
+
   document.getElementById('currentUrl').textContent = url;
 }
 

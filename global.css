@@ -12,6 +12,10 @@
   font-family: 'Inter', sans-serif !important;
 }
 
+#neto_virtual_message {
+  line-height: normal;
+}
+
 #neto_virtual_wrapper {
   display: block;
   position: fixed;
@@ -83,7 +87,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 
 #neto_virtual_partnerText {
