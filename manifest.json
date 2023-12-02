@@ -10,6 +10,9 @@
       "css": ["global.css"]
     }
   ],
+  "web_accessible_resources": [
+    "fonts/*.woff2"
+  ],
   "browser_action": {
     "default_popup": "popup.html"
   }
