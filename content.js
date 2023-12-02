@@ -32,16 +32,27 @@ const parteners = `<div id="neto_virtual_png" style="display: flex; gap: 20px; a
 <div id="neto_virtual_partner"><img src="https://github.com/neto-virtual/NetoExtension/blob/01-popup/images/Riachuelo.png?raw=true" alt="Ícone PNG"><text id="neto_virtual_partnerText">Riachuelo</text></div>
 </div>`
 
+
+const closeButton = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.6">
+<path d="M9.33331 9.33337L22.6666 22.6667M9.33331 22.6667L22.6666 9.33337" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+Fechar
+`
+
 const htmlTemplate = `
 <div id="neto_virtual_content">
-  <button id="neto_virtual_close_btn">&times;</button>
-  <div style="display: flex; gap: 8px; align-items: center;">
-    <div id="neto_virtual_icon"></div>
-    <h3 style="font-size: 35px; font-weight: 800; margin: 1rem 0; font-family: 'Roboto', sans-serif; ">NetoVirtual:</h3>
+  <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <div id="neto_virtual_icon" style="margin-top: -8px;"></div>
+      <h3 id="neto_virtual_title" style="font-size: 35px; font-weight: 800; margin: 1rem 0; font-family: 'Roboto', sans-serif; "></h3>
+    </div>
   </div>
   <p id="neto_virtual_message" style="font-size: 25px; margin: 1rem 0; font-family: 'Roboto', sans-serif; font-weight: 400; color: black;"></p>
   ${parteners}
-  </div>
+  <div id="neto_virtual_close_btn">${closeButton}</div>
+</div>
 `
 const whiteList = [
   'https://www.google.com/',
@@ -58,28 +69,45 @@ overlayDiv.innerHTML = htmlTemplate;
 
 document.body.appendChild(overlayDiv); 
 
+function loadTrustedOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Empresa Confiável!';
+  document.getElementById('neto_virtual_message').textContent =
+  'Esta é uma empresa verificada para você prosseguir com suas compras.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
+  document.getElementById('neto_virtual_close_btn').innerHTML = closeButton.replace('#1A1A1A', '#26A43A')
+  document.getElementById('neto_virtual_close_btn').style.border = '2px solid #26A43A'
 
+}
+
+function loadUntrustedOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Atenção!';
+  document.getElementById('neto_virtual_message').textContent =
+  'Encontramos vulnerabilidades neste site e não o recomendamos.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
+  document.getElementById('neto_virtual_close_btn').innerHTML = closeButton.replace('#1A1A1A', '#E23535')
+  document.getElementById('neto_virtual_close_btn').style.border = '2px solid #E23535'
+
+}  
+
+function loadNeutralOverlay() {
+  document.getElementById('neto_virtual_title').textContent = 'Hmm...';
+  document.getElementById('neto_virtual_message').textContent =
+  'Ainda não sei se esse site é seguro ou não.';
+  document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
+  document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_neutral';
+  document.getElementById('neto_virtual_close_btn').style.border = '2px solid #1A1A1A'
+}
 
 function loadOverlayContent(url) {
-  if (!url.startsWith('https')) {
-    document.getElementById('neto_virtual_message').innerHTML =
-    `Encontramos vulnerabilidades neste<br>
-    site e não a recomendamos.`;
-    document.getElementById('neto_virtual_icon').innerHTML = svgWarning;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_warning';
-  } else if (whiteList.includes(url)) {
-    // Add 'ok' emoji if the website is in the white list
-    document.getElementById('neto_virtual_message').textContent =
-      'Site na lista de sites seguros ✅';
-    document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_trusted';
+  if (whiteList.includes(url)) {
+    loadTrustedOverlay();
+  } else if (!url.startsWith('https')) {
+    loadUntrustedOverlay();
   } else {
-    document.getElementById('neto_virtual_message').textContent =
-      'Ainda não sei se esse site é seguro ou não.';
-    document.getElementById('neto_virtual_icon').innerHTML = svgTrusted;
-    document.getElementById('neto_virtual_wrapper').className = 'neto_virtual_neutral';
+    loadNeutralOverlay();
   }
-  
   document.getElementById('currentUrl').textContent = url;
 }
 
