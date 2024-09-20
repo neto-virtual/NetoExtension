@@ -1,7 +1,7 @@
-# Neto Virtual
+# Extensão Neto Virtual
 
 ### Descrição
-**Neto Virtual** foi criado com o objetivo de ajudar pessoas, principalmente idosos, a evitarem golpes ao comprar pela internet. Ele verifica se os sites que você acessa são confiáveis, mostrando uma indicação clara de segurança ou risco. Dessa forma, você pode navegar com mais tranquilidade e evitar fraudes online.
+**Extensão Neto Virtual** foi criado com o objetivo de ajudar pessoas, principalmente idosos, a evitarem golpes ao comprar pela internet. Ele verifica se os sites que você acessa são confiáveis, mostrando uma indicação clara de segurança ou risco. Dessa forma, você pode navegar com mais tranquilidade e evitar fraudes online.
 
 ### Funcionalidades
 - ✅ Verifica automaticamente se o site acessado é seguro.
