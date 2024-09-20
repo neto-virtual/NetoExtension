@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('chrome-extension://nnganamgkkmkmpniaajeiicpelijfpbh/fonts/inter.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* anything inside the #neto_virtual_wrapper */
+
+#neto_virtual_wrapper *, p, h3 {
+  font-family: 'Inter', sans-serif !important;
+}
+
+#neto_virtual_message {
+  line-height: normal;
+}
+
+#neto_virtual_wrapper {
+  display: block;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9000;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 540px;
+  user-select: none;
+}
+
+#neto_virtual_wrapper_popup {
+  display: block;
+  z-index: 9000;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 540px;
+  user-select: none;
+  margin: 0;
+}
+
+.neto_virtual_trusted {
+  background-color: #DCFFE2;
+  color: #26A43A;
+}
+
+.neto_virtual_warning {
+  background-color: #FFD7D7;
+  color: #E23535;
+}
+
+.neto_virtual_neutral {
+  background-color: #F2F2F2;
+  color: #333;
+}
+
+.neto_virtual_hidden {
+  display: none;
+}
+
+#neto_virtual_content {
+  position: relative;
+}
+
+#neto_virtual_close_btn {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: all 0.1s ease-in-out;
+  margin-top: 1rem;
+}
+
+#neto_virtual_close_btn:hover {
+  background-color: #AAA4;
+}
+
+#neto_virtual_close_btn:active {
+  background-color: #3333;
+}
+
+#neto_virtual_partner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+#neto_virtual_partnerText {
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 5px;
+}

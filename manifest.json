@@ -1,14 +1,19 @@
 {
   "manifest_version": 2,
-  "name": "Verificador de Segurança",
+  "name": "URL Overlay",
   "version": "1.0",
-  "description": "Verifica se um site é seguro.",
+  "permissions": ["tabs", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["global.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*.woff2"
+  ],
   "browser_action": {
     "default_popup": "popup.html"
-
-  },
-  "permissions": [
-    "activeTab",
-    "storage"
-  ]
+  }
 }
